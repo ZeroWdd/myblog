@@ -1,0 +1,23 @@
+{
+  "groups": [
+    {
+      "name": "var",
+      "type": "com.wdd.myblog.util.FilePath",
+      "sourceType": "com.wdd.myblog.util.FilePath"
+    }
+  ],
+  "properties": [
+    {
+      "name": "var.context-path",
+      "type": "java.lang.String",
+      "sourceType": "com.wdd.myblog.util.FilePath",
+      "defaultValue": "user.dir"
+    },
+    {
+      "name": "var.file-path",
+      "type": "java.lang.String",
+      "sourceType": "com.wdd.myblog.util.FilePath"
+    }
+  ],
+  "hints": []
+}
