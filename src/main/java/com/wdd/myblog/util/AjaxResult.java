@@ -6,11 +6,12 @@ package com.wdd.myblog.util;
  * @Date 2019/7/7 13.48
  * @Created by WDD
  */
-public class AjaxResult {
+public class AjaxResult<T> {
     private boolean success;
     private String message;
     private String type;
     private String img;
+    private T data;
 
     public boolean isSuccess() {
         return success;
@@ -44,4 +45,11 @@ public class AjaxResult {
         this.img = img;
     }
 
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
 }

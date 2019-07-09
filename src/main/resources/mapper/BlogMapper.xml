@@ -37,39 +37,40 @@
 <!--        from tb_blog-->
 <!--        where blog_id = #{blogId,jdbcType=BIGINT} and is_deleted = 0-->
 <!--    </select>-->
-<!--    <select id="findBlogList" parameterType="Map" resultMap="BaseResultMap">-->
-<!--        select-->
-<!--        <include refid="Base_Column_List"/>-->
-<!--        from tb_blog-->
-<!--        where is_deleted=0-->
-<!--        <if test="keyword!=null">-->
-<!--            AND (blog_title like CONCAT('%','${keyword}','%' ) or blog_category_name like CONCAT('%','${keyword}','%' ))-->
-<!--        </if>-->
-<!--        <if test="blogStatus!=null">-->
-<!--            AND blog_status = #{blogStatus}-->
-<!--        </if>-->
-<!--        <if test="blogCategoryId!=null">-->
-<!--            AND blog_category_id = #{blogCategoryId}-->
-<!--        </if>-->
-<!--        order by blog_id desc-->
-<!--        <if test="start!=null and limit!=null">-->
-<!--            limit #{start},#{limit}-->
-<!--        </if>-->
-<!--    </select>-->
+    <select id="findBlogList" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_blog
+        where is_deleted=0
+        <if test="keyword!=null">
+            AND (blog_title like CONCAT('%','${keyword}','%' ) or blog_category_name like CONCAT('%','${keyword}','%' ))
+        </if>
+        <if test="blogStatus!=null">
+            AND blog_status = #{blogStatus}
+        </if>
+        <if test="blogCategoryId!=null">
+            AND blog_category_id = #{blogCategoryId}
+        </if>
+        order by blog_id desc
+        <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+        </if>
+    </select>
 
-<!--    <select id="getTotalBlogs" parameterType="Map" resultType="int">-->
-<!--        select count(*) from tb_blog-->
-<!--        where is_deleted=0-->
-<!--        <if test="keyword!=null">-->
-<!--            AND (blog_title like CONCAT('%','${keyword}','%' ) or blog_category_name like CONCAT('%','${keyword}','%' ))-->
-<!--        </if>-->
-<!--        <if test="blogStatus!=null">-->
-<!--            AND blog_status = #{blogStatus}-->
-<!--        </if>-->
-<!--        <if test="blogCategoryId!=null">-->
-<!--            AND blog_category_id = #{blogCategoryId}-->
-<!--        </if>-->
-<!--    </select>-->
+    <select id="getTotalBlogs" parameterType="Map" resultType="int">
+        select count(*) from tb_blog
+        where is_deleted=0
+        <if test="keyword!=null">
+            AND (blog_title like CONCAT('%','${keyword}','%' ) or blog_category_name like CONCAT('%','${keyword}','%' ))
+        </if>
+        <if test="blogStatus!=null">
+            AND blog_status = #{blogStatus}
+        </if>
+        <if test="blogCategoryId!=null">
+            AND blog_category_id = #{blogCategoryId}
+        </if>
+    </select>
+
 <!--    <select id="findBlogListByType" resultMap="BaseResultMap">-->
 <!--        select-->
 <!--        <include refid="Base_Column_List"/>-->

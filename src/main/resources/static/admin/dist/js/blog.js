@@ -30,7 +30,7 @@ $(function () {
         prmNames: {
             page: "page",
             rows: "limit",
-            order: "order",
+            order: "order"
         },
         gridComplete: function () {
             //隐藏grid底部滚动条

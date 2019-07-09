@@ -1,6 +1,8 @@
 package com.wdd.myblog.service;
 
 import com.wdd.myblog.entity.Blog;
+import com.wdd.myblog.util.PageQueryUtil;
+import com.wdd.myblog.util.PageResult;
 
 /**
  * @Classname BlogService
@@ -10,4 +12,6 @@ import com.wdd.myblog.entity.Blog;
  */
 public interface BlogService {
     String saveBlog(Blog blog);
+
+    PageResult getBlogsPage(PageQueryUtil pageUtil);
 }

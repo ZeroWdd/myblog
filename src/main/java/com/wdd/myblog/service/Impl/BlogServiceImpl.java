@@ -9,6 +9,8 @@ import com.wdd.myblog.entity.BlogCategory;
 import com.wdd.myblog.entity.BlogTag;
 import com.wdd.myblog.entity.BlogTagRelation;
 import com.wdd.myblog.service.BlogService;
+import com.wdd.myblog.util.PageQueryUtil;
+import com.wdd.myblog.util.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -90,4 +92,14 @@ public class BlogServiceImpl implements BlogService {
         }
         return "保存失败";
     }
+
+    @Override
+    public PageResult getBlogsPage(PageQueryUtil pageUtil) {
+        List<Blog> blogList = blogMapper.findBlogList(pageUtil);
+        int total = blogMapper.getTotalBlogs(pageUtil);
+        PageResult pageResult = new PageResult(blogList, total, pageUtil.getLimit(), pageUtil.getPage());
+        return pageResult;
+    }
+
+
 }

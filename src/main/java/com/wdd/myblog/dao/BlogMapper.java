@@ -1,6 +1,9 @@
 package com.wdd.myblog.dao;
 
 import com.wdd.myblog.entity.Blog;
+import com.wdd.myblog.util.PageQueryUtil;
+
+import java.util.List;
 
 /**
  * @Classname BlogMapper
@@ -10,4 +13,8 @@ import com.wdd.myblog.entity.Blog;
  */
 public interface BlogMapper {
     int insertSelective(Blog record);
+
+    List<Blog> findBlogList(PageQueryUtil pageUtil);
+
+    int getTotalBlogs(PageQueryUtil pageUtil);
 }

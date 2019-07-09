@@ -5,15 +5,15 @@ import com.wdd.myblog.service.BlogCategoryService;
 import com.wdd.myblog.service.BlogService;
 import com.wdd.myblog.util.AjaxResult;
 import com.wdd.myblog.util.Const;
+import com.wdd.myblog.util.PageQueryUtil;
+import com.wdd.myblog.util.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * @Classname BlogController
@@ -39,6 +39,24 @@ public class BlogController {
     public String list(HttpServletRequest request) {
         request.setAttribute("path", "blogs");
         return "admin/blog";
+    }
+
+    /**
+     * 异步加载博客数据列表
+     * @param params
+     * @return
+     */
+    @GetMapping("/blogs/list")
+    @ResponseBody
+    public Object list(@RequestParam Map<String, Object> params) {
+        AjaxResult<Object> ajaxResult = new AjaxResult<>();
+        if (StringUtils.isEmpty(params.get("page")) || StringUtils.isEmpty(params.get("limit"))) {
+            ajaxResult.setMessage("参数异常！");
+        }
+        PageQueryUtil pageUtil = new PageQueryUtil(params);
+        PageResult blogsPage = blogService.getBlogsPage(pageUtil);
+        ajaxResult.setData(blogsPage);
+        return ajaxResult;
     }
 
     /**
