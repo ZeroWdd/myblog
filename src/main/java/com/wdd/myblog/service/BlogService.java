@@ -14,4 +14,10 @@ public interface BlogService {
     String saveBlog(Blog blog);
 
     PageResult getBlogsPage(PageQueryUtil pageUtil);
+
+    Blog getBlogById(Long blogId);
+
+    String updateBlog(Blog blog);
+
+    boolean deleteBatch(Integer[] ids);
 }

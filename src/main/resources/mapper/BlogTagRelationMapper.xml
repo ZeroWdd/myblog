@@ -39,10 +39,12 @@
 <!--    delete from tb_blog_tag_relation-->
 <!--    where relation_id = #{relationId,jdbcType=BIGINT}-->
 <!--  </delete>-->
-<!--    <delete id="deleteByBlogId" parameterType="java.lang.Long">-->
-<!--        delete from tb_blog_tag_relation-->
-<!--        where blog_id = #{blogId,jdbcType=BIGINT}-->
-<!--    </delete>-->
+
+    <delete id="deleteByBlogId" parameterType="java.lang.Long">
+        delete from tb_blog_tag_relation
+        where blog_id = #{blogId,jdbcType=BIGINT}
+    </delete>
+
 <!--    <insert id="insert" parameterType="com.site.blog.my.core.entity.BlogTagRelation">-->
 <!--    insert into tb_blog_tag_relation (relation_id, blog_id, tag_id,-->
 <!--      create_time)-->
