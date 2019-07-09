@@ -31,6 +31,17 @@ public class BlogController {
     private BlogCategoryService blogCategoryService;
 
     /**
+     * 跳转博客首页
+     * @param request
+     * @return
+     */
+    @GetMapping("/blogs")
+    public String list(HttpServletRequest request) {
+        request.setAttribute("path", "blogs");
+        return "admin/blog";
+    }
+
+    /**
      * 编辑修改博客
      * @param request
      * @return
@@ -42,6 +53,11 @@ public class BlogController {
         return "admin/edit";
     }
 
+    /**
+     * 保存博客
+     * @param blog
+     * @return
+     */
     @PostMapping("/blogs/save")
     @ResponseBody
     public AjaxResult save(Blog blog) {
@@ -86,12 +102,14 @@ public class BlogController {
             ajaxResult.setMessage("封面图不能为空");
             return ajaxResult;
         }
-//        String saveBlogResult = blogService.saveBlog(blog);
-//        if ("success".equals(saveBlogResult)) {
-//            return ResultGenerator.genSuccessResult("添加成功");
-//        } else {
-//            return ResultGenerator.genFailResult(saveBlogResult);
-//        }
+        String saveBlogResult = blogService.saveBlog(blog);
+        if ("success".equals(saveBlogResult)) {
+            ajaxResult.setSuccess(true);
+            ajaxResult.setMessage("添加成功");
+        } else {
+            ajaxResult.setSuccess(false);
+            ajaxResult.setMessage(saveBlogResult);
+        }
         return ajaxResult;
     }
 }

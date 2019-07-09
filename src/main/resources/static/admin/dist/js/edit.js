@@ -142,13 +142,13 @@ $('#saveButton').click(function () {
             "enableComment": enableComment
         };
     }
-    console.log(data);
+    // console.log(data);
     $.ajax({
         type: 'POST',//方法类型
         url: url,
         data: data,
         success: function (result) {
-            if (result.resultCode == 200) {
+            if (result.success) {
                 $('#articleModal').modal('hide');
                 swal({
                     title: swlMessage,
@@ -161,14 +161,12 @@ $('#saveButton').click(function () {
                 }).then(function () {
                     window.location.href = "/admin/blogs";
                 })
-            }
-            else {
+            } else {
                 $('#articleModal').modal('hide');
                 swal(result.message, {
                     icon: "error",
                 });
-            }
-            ;
+            };
         },
         error: function () {
             swal("操作失败", {

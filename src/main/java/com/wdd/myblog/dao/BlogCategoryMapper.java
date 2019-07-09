@@ -13,4 +13,7 @@ import java.util.List;
 public interface BlogCategoryMapper {
     List<BlogCategory> findCategoryList();
 
+    BlogCategory selectByPrimaryKey(Integer blogCategoryId);
+
+    void updateByPrimaryKeySelective(BlogCategory blogCategory);
 }

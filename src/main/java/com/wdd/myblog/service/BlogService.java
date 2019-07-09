@@ -1,5 +1,7 @@
 package com.wdd.myblog.service;
 
+import com.wdd.myblog.entity.Blog;
+
 /**
  * @Classname BlogService
  * @Description None
@@ -7,4 +9,5 @@ package com.wdd.myblog.service;
  * @Created by WDD
  */
 public interface BlogService {
+    String saveBlog(Blog blog);
 }

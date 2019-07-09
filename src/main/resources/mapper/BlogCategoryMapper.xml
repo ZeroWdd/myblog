@@ -29,12 +29,13 @@
 <!--    where is_deleted=0-->
 <!--    </select>-->
 
-<!--    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
-<!--        select-->
-<!--        <include refid="Base_Column_List"/>-->
-<!--        from tb_blog_category-->
-<!--        where category_id = #{categoryId,jdbcType=INTEGER} AND is_deleted = 0-->
-<!--    </select>-->
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_blog_category
+        where category_id = #{categoryId,jdbcType=INTEGER} AND is_deleted = 0
+    </select>
+
 <!--    <select id="selectByCategoryIds" resultMap="BaseResultMap">-->
 <!--        select-->
 <!--        <include refid="Base_Column_List"/>-->
@@ -114,27 +115,29 @@
 <!--            </if>-->
 <!--        </trim>-->
 <!--    </insert>-->
-<!--    <update id="updateByPrimaryKeySelective" parameterType="com.site.blog.my.core.entity.BlogCategory">-->
-<!--        update tb_blog_category-->
-<!--        <set>-->
-<!--            <if test="categoryName != null">-->
-<!--                category_name = #{categoryName,jdbcType=VARCHAR},-->
-<!--            </if>-->
-<!--            <if test="categoryIcon != null">-->
-<!--                category_icon = #{categoryIcon,jdbcType=VARCHAR},-->
-<!--            </if>-->
-<!--            <if test="categoryRank != null">-->
-<!--                category_rank = #{categoryRank,jdbcType=INTEGER},-->
-<!--            </if>-->
-<!--            <if test="isDeleted != null">-->
-<!--                is_deleted = #{isDeleted,jdbcType=TINYINT},-->
-<!--            </if>-->
-<!--            <if test="createTime != null">-->
-<!--                create_time = #{createTime,jdbcType=TIMESTAMP},-->
-<!--            </if>-->
-<!--        </set>-->
-<!--        where category_id = #{categoryId,jdbcType=INTEGER}-->
-<!--    </update>-->
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.wdd.myblog.entity.BlogCategory">
+        update tb_blog_category
+        <set>
+            <if test="categoryName != null">
+                category_name = #{categoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryIcon != null">
+                category_icon = #{categoryIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryRank != null">
+                category_rank = #{categoryRank,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where category_id = #{categoryId,jdbcType=INTEGER}
+    </update>
+
 <!--    <update id="updateByPrimaryKey" parameterType="com.site.blog.my.core.entity.BlogCategory">-->
 <!--    update tb_blog_category-->
 <!--    set category_name = #{categoryName,jdbcType=VARCHAR},-->
