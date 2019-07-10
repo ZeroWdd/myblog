@@ -25,5 +25,5 @@ public interface BlogCategoryMapper {
 
     int insertSelective(BlogCategory record);
 
-    int getBlogCategoryById(Integer id);
+    int deleteBatch(Integer[] ids);
 }

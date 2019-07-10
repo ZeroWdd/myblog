@@ -22,4 +22,6 @@ public interface BlogCategoryService {
     boolean updateCategory(Integer categoryId, String categoryName, String categoryIcon);
 
     BlogCategory getBlogCategoryById(Integer id);
+
+    boolean deleteBatch(Integer[] ids);
 }

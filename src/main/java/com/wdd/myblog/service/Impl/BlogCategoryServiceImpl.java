@@ -70,4 +70,15 @@ public class BlogCategoryServiceImpl implements BlogCategoryService {
         return blogCategoryMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public boolean deleteBatch(Integer[] ids) {
+        if (ids.length < 1) {
+            return false;
+        }
+        //修改tb_blog表
+        blogMapper.updateBlogCategorys("默认分类", 0, ids);
+        //删除分类数据
+        return blogCategoryMapper.deleteBatch(ids) > 0;
+    }
+
 }

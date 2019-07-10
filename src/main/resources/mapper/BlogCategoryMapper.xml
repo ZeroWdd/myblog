@@ -58,13 +58,15 @@
 <!--    UPDATE tb_blog_category SET  is_deleted = 1-->
 <!--    where category_id = #{categoryId,jdbcType=VARCHAR} AND is_deleted = 0-->
 <!--    </update>-->
-<!--    <update id="deleteBatch">-->
-<!--        update tb_blog_category-->
-<!--        set is_deleted=1 where category_id in-->
-<!--        <foreach item="id" collection="array" open="(" separator="," close=")">-->
-<!--            #{id}-->
-<!--        </foreach>-->
-<!--    </update>-->
+
+    <update id="deleteBatch">
+        update tb_blog_category
+        set is_deleted=1 where category_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
 <!--    <insert id="insert" parameterType="com.site.blog.my.core.entity.BlogCategory">-->
 <!--    insert into tb_blog_category (category_id, category_name, category_icon, -->
 <!--      category_rank, is_deleted, create_time-->

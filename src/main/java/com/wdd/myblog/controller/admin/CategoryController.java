@@ -47,6 +47,7 @@ public class CategoryController {
     public AjaxResult<Object> list(@RequestParam Map<String, Object> params) {
         AjaxResult<Object> ajaxResult = new AjaxResult<>();
         if (StringUtils.isEmpty(params.get("page")) || StringUtils.isEmpty(params.get("limit"))) {
+            ajaxResult.setSuccess(false);
             ajaxResult.setMessage("参数异常！");
             return ajaxResult;
         }
@@ -69,6 +70,7 @@ public class CategoryController {
                        @RequestParam("categoryIcon") String categoryIcon) {
         AjaxResult ajaxResult = new AjaxResult<>();
         if (StringUtils.isEmpty(categoryName) || StringUtils.isEmpty(categoryIcon)) {
+            ajaxResult.setSuccess(false);
             ajaxResult.setMessage("参数异常！");
             return ajaxResult;
         }
@@ -96,6 +98,7 @@ public class CategoryController {
                          @RequestParam("categoryIcon") String categoryIcon) {
         AjaxResult ajaxResult = new AjaxResult<>();
         if (StringUtils.isEmpty(categoryName) || StringUtils.isEmpty(categoryIcon)) {
+            ajaxResult.setSuccess(false);
             ajaxResult.setMessage("参数异常！");
             return ajaxResult;
         }
@@ -124,6 +127,29 @@ public class CategoryController {
         }else{
             ajaxResult.setSuccess(false);
             ajaxResult.setMessage("数据异常");
+        }
+        return ajaxResult;
+    }
+
+    /**
+     * 删除分类
+     * @param ids
+     * @return
+     */
+    @PostMapping("/categories/delete")
+    @ResponseBody
+    public AjaxResult delete(@RequestBody Integer[] ids) {
+        AjaxResult ajaxResult = new AjaxResult();
+        if (ids.length < 1) {
+            ajaxResult.setSuccess(false);
+            ajaxResult.setMessage("参数异常！");
+            return ajaxResult;
+        }
+        if (blogCategoryService.deleteBatch(ids)) {
+            ajaxResult.setSuccess(true);
+        } else {
+            ajaxResult.setSuccess(false);
+            ajaxResult.setMessage("删除失败");
         }
         return ajaxResult;
     }
