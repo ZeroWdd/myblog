@@ -1,6 +1,7 @@
 package com.wdd.myblog.dao;
 
 import com.wdd.myblog.entity.BlogTag;
+import com.wdd.myblog.util.PageQueryUtil;
 
 import java.util.List;
 
@@ -14,4 +15,12 @@ public interface BlogTagMapper {
     BlogTag selectByTagName(String tag);
 
     void batchInsertBlogTag(List<BlogTag> tagListForInsert);
+
+    List<BlogTag> findTagList(PageQueryUtil pageUtil);
+
+    int getTotalTags(PageQueryUtil pageUtil);
+
+    int insertSelective(BlogTag record);
+
+    int deleteBatch(Integer[] ids);
 }

@@ -93,7 +93,7 @@ $('#saveButton').click(function () {
             url: url,
             data: params,
             success: function (result) {
-                if (result.resultCode == 200) {
+                if (result.success) {
                     $('#categoryModal').modal('hide');
                     swal("保存成功", {
                         icon: "success",
@@ -123,9 +123,38 @@ function categoryEdit() {
     if (id == null) {
         return;
     }
-    $('.modal-title').html('分类编辑');
-    $('#categoryModal').modal('show');
-    $("#categoryId").val(id);
+    $.ajax({
+        type: 'POST',//方法类型
+        url: "/admin/categories/echo",
+        data: {"id":id},
+        success: function (result) {
+            if (result.success) {
+                $('.modal-title').html('分类编辑');
+                $('#categoryModal').modal('show');
+                $("#categoryId").val(id);
+                $("#categoryName").val(result.data.categoryName);
+                //$("#categoryIcon").val(result.data.categoryIcon);
+                //$("#categoryIcon option:first").prop("selected", 'selected');
+                $("#categoryIcon option").each(function (){
+                    if($(this).val() == result.data.categoryIcon){
+                        $(this).prop("selected", true);
+                    }
+                });
+                $(".image_picker_selector li").each(function () {
+                    $(this).children().removeClass("selected");
+                    if($(this).children().children().attr("src") == result.data.categoryIcon){
+                        $(this).children().addClass("selected");
+                    }
+                })
+
+            };
+        },
+        error: function () {
+            swal("操作失败", {
+                icon: "error",
+            });
+        }
+    });
 }
 
 function deleteCagegory() {

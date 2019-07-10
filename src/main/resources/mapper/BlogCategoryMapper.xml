@@ -24,10 +24,10 @@
         </if>
     </select>
 
-<!--    <select id="getTotalCategories" parameterType="Map" resultType="int">-->
-<!--    select count(*)  from tb_blog_category-->
-<!--    where is_deleted=0-->
-<!--    </select>-->
+    <select id="getTotalCategories" parameterType="Map" resultType="int">
+    select count(*)  from tb_blog_category
+    where is_deleted=0
+    </select>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -47,12 +47,13 @@
 <!--        AND is_deleted = 0-->
 <!--    </select>-->
 
-<!--    <select id="selectByCategoryName" parameterType="java.lang.String" resultMap="BaseResultMap">-->
-<!--        select-->
-<!--        <include refid="Base_Column_List"/>-->
-<!--        from tb_blog_category-->
-<!--        where category_name = #{categoryName,jdbcType=INTEGER} AND is_deleted = 0-->
-<!--    </select>-->
+    <select id="selectByCategoryName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_blog_category
+        where category_name = #{categoryName,jdbcType=INTEGER} AND is_deleted = 0
+    </select>
+
 <!--    <update id="deleteByPrimaryKey" parameterType="java.lang.Integer">-->
 <!--    UPDATE tb_blog_category SET  is_deleted = 1-->
 <!--    where category_id = #{categoryId,jdbcType=VARCHAR} AND is_deleted = 0-->
@@ -72,49 +73,50 @@
 <!--      #{categoryRank,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}-->
 <!--      )-->
 <!--  </insert>-->
-<!--    <insert id="insertSelective" parameterType="com.site.blog.my.core.entity.BlogCategory">-->
-<!--        insert into tb_blog_category-->
-<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
-<!--            <if test="categoryId != null">-->
-<!--                category_id,-->
-<!--            </if>-->
-<!--            <if test="categoryName != null">-->
-<!--                category_name,-->
-<!--            </if>-->
-<!--            <if test="categoryIcon != null">-->
-<!--                category_icon,-->
-<!--            </if>-->
-<!--            <if test="categoryRank != null">-->
-<!--                category_rank,-->
-<!--            </if>-->
-<!--            <if test="isDeleted != null">-->
-<!--                is_deleted,-->
-<!--            </if>-->
-<!--            <if test="createTime != null">-->
-<!--                create_time,-->
-<!--            </if>-->
-<!--        </trim>-->
-<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
-<!--            <if test="categoryId != null">-->
-<!--                #{categoryId,jdbcType=INTEGER},-->
-<!--            </if>-->
-<!--            <if test="categoryName != null">-->
-<!--                #{categoryName,jdbcType=VARCHAR},-->
-<!--            </if>-->
-<!--            <if test="categoryIcon != null">-->
-<!--                #{categoryIcon,jdbcType=VARCHAR},-->
-<!--            </if>-->
-<!--            <if test="categoryRank != null">-->
-<!--                #{categoryRank,jdbcType=INTEGER},-->
-<!--            </if>-->
-<!--            <if test="isDeleted != null">-->
-<!--                #{isDeleted,jdbcType=TINYINT},-->
-<!--            </if>-->
-<!--            <if test="createTime != null">-->
-<!--                #{createTime,jdbcType=TIMESTAMP},-->
-<!--            </if>-->
-<!--        </trim>-->
-<!--    </insert>-->
+
+    <insert id="insertSelective" parameterType="com.wdd.myblog.entity.BlogCategory">
+        insert into tb_blog_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoryId != null">
+                category_id,
+            </if>
+            <if test="categoryName != null">
+                category_name,
+            </if>
+            <if test="categoryIcon != null">
+                category_icon,
+            </if>
+            <if test="categoryRank != null">
+                category_rank,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="categoryId != null">
+                #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="categoryName != null">
+                #{categoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryIcon != null">
+                #{categoryIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryRank != null">
+                #{categoryRank,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.wdd.myblog.entity.BlogCategory">
         update tb_blog_category
@@ -147,4 +149,5 @@
 <!--      create_time = #{createTime,jdbcType=TIMESTAMP}-->
 <!--    where category_id = #{categoryId,jdbcType=INTEGER}-->
 <!--    </update>-->
+
 </mapper>

@@ -60,7 +60,7 @@ function tagAdd() {
             type: 'POST',//方法类型
             url: url,
             success: function (result) {
-                if (result.resultCode == 200) {
+                if (result.success) {
                     $("#tagName").val('')
                     swal("保存成功", {
                         icon: "success",
@@ -103,7 +103,7 @@ function deleteTag() {
                     contentType: "application/json",
                     data: JSON.stringify(ids),
                     success: function (r) {
-                        if (r.resultCode == 200) {
+                        if (r.success) {
                             swal("删除成功", {
                                 icon: "success",
                             });

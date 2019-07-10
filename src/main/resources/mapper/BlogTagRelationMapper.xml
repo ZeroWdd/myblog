@@ -25,15 +25,15 @@
 <!--        where blog_id = #{blogId,jdbcType=BIGINT} and tag_id = #{tagId,jdbcType=INTEGER} limit 1-->
 <!--    </select>-->
 
-<!--    <select id="selectDistinctTagIds" resultType="java.lang.Long">-->
-<!--        select-->
-<!--        DISTINCT(tag_id)-->
-<!--        from tb_blog_tag_relation-->
-<!--        where tag_id in-->
-<!--        <foreach item="id" collection="array" open="(" separator="," close=")">-->
-<!--            #{id}-->
-<!--        </foreach>-->
-<!--    </select>-->
+    <select id="selectDistinctTagIds" resultType="java.lang.Long">
+        select
+        DISTINCT(tag_id)
+        from tb_blog_tag_relation
+        where tag_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
 
 <!--    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">-->
 <!--    delete from tb_blog_tag_relation-->

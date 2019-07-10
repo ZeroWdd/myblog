@@ -314,14 +314,15 @@
 <!--      update_time = #{updateTime,jdbcType=TIMESTAMP}-->
 <!--    where blog_id = #{blogId,jdbcType=BIGINT}-->
 <!--  </update>-->
-<!--    <update id="updateBlogCategorys">-->
-<!--        update tb_blog-->
-<!--        set blog_category_id = #{categoryId,jdbcType=INTEGER},-->
-<!--        blog_category_name = #{categoryName,jdbcType=VARCHAR}-->
-<!--        where blog_category_id in-->
-<!--        <foreach item="id" collection="ids" open="(" separator="," close=")">-->
-<!--            #{id}-->
-<!--        </foreach>-->
-<!--        and is_deleted =0-->
-<!--    </update>-->
+
+    <update id="updateBlogCategorys">
+        update tb_blog
+        set blog_category_id = #{categoryId,jdbcType=INTEGER},
+        blog_category_name = #{categoryName,jdbcType=VARCHAR}
+        where blog_category_id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        and is_deleted =0
+    </update>
 </mapper>

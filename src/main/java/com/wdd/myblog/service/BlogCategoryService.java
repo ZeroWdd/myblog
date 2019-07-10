@@ -1,6 +1,8 @@
 package com.wdd.myblog.service;
 
 import com.wdd.myblog.entity.BlogCategory;
+import com.wdd.myblog.util.PageQueryUtil;
+import com.wdd.myblog.util.PageResult;
 
 import java.util.List;
 
@@ -12,4 +14,12 @@ import java.util.List;
  */
 public interface BlogCategoryService {
     List<BlogCategory> getAllCategories();
+
+    PageResult getBlogCategoryPage(PageQueryUtil pageUtil);
+
+    boolean saveCategory(String categoryName, String categoryIcon);
+
+    boolean updateCategory(Integer categoryId, String categoryName, String categoryIcon);
+
+    BlogCategory getBlogCategoryById(Integer id);
 }

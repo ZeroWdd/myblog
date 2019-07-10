@@ -1,6 +1,7 @@
 package com.wdd.myblog.dao;
 
 import com.wdd.myblog.entity.BlogCategory;
+import com.wdd.myblog.util.PageQueryUtil;
 
 import java.util.List;
 
@@ -11,9 +12,18 @@ import java.util.List;
  * @Created by WDD
  */
 public interface BlogCategoryMapper {
-    List<BlogCategory> findCategoryList();
 
     BlogCategory selectByPrimaryKey(Integer blogCategoryId);
 
-    void updateByPrimaryKeySelective(BlogCategory blogCategory);
+    int updateByPrimaryKeySelective(BlogCategory blogCategory);
+
+    List<BlogCategory> findCategoryList(PageQueryUtil pageUtil);
+
+    int getTotalCategories(PageQueryUtil pageUtil);
+
+    BlogCategory selectByCategoryName(String categoryName);
+
+    int insertSelective(BlogCategory record);
+
+    int getBlogCategoryById(Integer id);
 }

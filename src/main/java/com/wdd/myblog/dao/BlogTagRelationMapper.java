@@ -15,4 +15,6 @@ public interface BlogTagRelationMapper {
     int batchInsert(@Param("relationList") List<BlogTagRelation> blogTagRelationList);
 
     void deleteByBlogId(Long blogId);
+
+    List<Long> selectDistinctTagIds(Integer[] ids);
 }

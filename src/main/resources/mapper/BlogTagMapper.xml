@@ -18,29 +18,30 @@
         tag_id, tag_name, is_deleted, create_time
     </sql>
 
-<!--    <select id="findTagList" parameterType="Map" resultMap="BaseResultMap">-->
-<!--        select-->
-<!--        <include refid="Base_Column_List"/>-->
-<!--        from tb_blog_tag-->
-<!--        where is_deleted=0-->
-<!--        order by tag_id desc-->
-<!--        <if test="start!=null and limit!=null">-->
-<!--            limit #{start},#{limit}-->
-<!--        </if>-->
-<!--    </select>-->
+    <select id="findTagList" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_blog_tag
+        where is_deleted=0
+        order by tag_id desc
+        <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+        </if>
+    </select>
 
-<!--    <select id="getTagCount" resultMap="BaseCountResultMap">-->
-<!--        SELECT t_r.*,t.tag_name FROM-->
-<!--        (SELECT r.tag_id,r.tag_count FROM-->
-<!--         (SELECT tag_id ,COUNT(*) AS tag_count FROM-->
-<!--	      (SELECT tr.tag_id FROM tb_blog_tag_relation tr LEFT JOIN tb_blog b ON tr.blog_id = b.blog_id WHERE b.is_deleted=0)-->
-<!--	        trb GROUP BY tag_id) r ORDER BY tag_count DESC LIMIT 20 ) AS t_r LEFT JOIN tb_blog_tag t ON t_r.tag_id = t.tag_id WHERE t.is_deleted=0-->
-<!--    </select>-->
+    <select id="getTotalTags" parameterType="Map" resultType="int">
+        select count(*)  from tb_blog_tag
+        where is_deleted=0
+    </select>
 
-<!--    <select id="getTotalTags" parameterType="Map" resultType="int">-->
-<!--        select count(*)  from tb_blog_tag-->
-<!--        where is_deleted=0-->
-<!--    </select>-->
+    <!--    <select id="getTagCount" resultMap="BaseCountResultMap">-->
+    <!--        SELECT t_r.*,t.tag_name FROM-->
+    <!--        (SELECT r.tag_id,r.tag_count FROM-->
+    <!--         (SELECT tag_id ,COUNT(*) AS tag_count FROM-->
+    <!--	      (SELECT tr.tag_id FROM tb_blog_tag_relation tr LEFT JOIN tb_blog b ON tr.blog_id = b.blog_id WHERE b.is_deleted=0)-->
+    <!--	        trb GROUP BY tag_id) r ORDER BY tag_count DESC LIMIT 20 ) AS t_r LEFT JOIN tb_blog_tag t ON t_r.tag_id = t.tag_id WHERE t.is_deleted=0-->
+    <!--    </select>-->
+
 
 <!--    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
 <!--        select-->
@@ -61,13 +62,13 @@
 <!--        where tag_id = #{tagId,jdbcType=INTEGER}-->
 <!--    </update>-->
 
-<!--    <update id="deleteBatch">-->
-<!--        update tb_blog_tag-->
-<!--        set is_deleted=1 where tag_id in-->
-<!--        <foreach item="id" collection="array" open="(" separator="," close=")">-->
-<!--            #{id}-->
-<!--        </foreach>-->
-<!--    </update>-->
+    <update id="deleteBatch">
+        update tb_blog_tag
+        set is_deleted=1 where tag_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
 
     <insert id="batchInsertBlogTag" parameterType="java.util.List" useGeneratedKeys="true"
             keyProperty="tagId">
@@ -84,37 +85,37 @@
 <!--    values (#{tagId,jdbcType=INTEGER}, #{tagName,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT},-->
 <!--      #{createTime,jdbcType=TIMESTAMP})-->
 <!--  </insert>-->
-<!--    <insert id="insertSelective" parameterType="com.site.blog.my.core.entity.BlogTag">-->
-<!--        insert into tb_blog_tag-->
-<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
-<!--            <if test="tagId != null">-->
-<!--                tag_id,-->
-<!--            </if>-->
-<!--            <if test="tagName != null">-->
-<!--                tag_name,-->
-<!--            </if>-->
-<!--            <if test="isDeleted != null">-->
-<!--                is_deleted,-->
-<!--            </if>-->
-<!--            <if test="createTime != null">-->
-<!--                create_time,-->
-<!--            </if>-->
-<!--        </trim>-->
-<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
-<!--            <if test="tagId != null">-->
-<!--                #{tagId,jdbcType=INTEGER},-->
-<!--            </if>-->
-<!--            <if test="tagName != null">-->
-<!--                #{tagName,jdbcType=VARCHAR},-->
-<!--            </if>-->
-<!--            <if test="isDeleted != null">-->
-<!--                #{isDeleted,jdbcType=TINYINT},-->
-<!--            </if>-->
-<!--            <if test="createTime != null">-->
-<!--                #{createTime,jdbcType=TIMESTAMP},-->
-<!--            </if>-->
-<!--        </trim>-->
-<!--    </insert>-->
+    <insert id="insertSelective" parameterType="com.wdd.myblog.entity.BlogTag">
+        insert into tb_blog_tag
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tagId != null">
+                tag_id,
+            </if>
+            <if test="tagName != null">
+                tag_name,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tagId != null">
+                #{tagId,jdbcType=INTEGER},
+            </if>
+            <if test="tagName != null">
+                #{tagName,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
 <!--    <update id="updateByPrimaryKeySelective" parameterType="com.site.blog.my.core.entity.BlogTag">-->
 <!--        update tb_blog_tag-->
 <!--        <set>-->

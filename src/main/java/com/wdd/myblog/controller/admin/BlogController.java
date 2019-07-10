@@ -50,6 +50,7 @@ public class BlogController {
         AjaxResult<Object> ajaxResult = new AjaxResult<>();
         if (StringUtils.isEmpty(params.get("page")) || StringUtils.isEmpty(params.get("limit"))) {
             ajaxResult.setMessage("参数异常！");
+            return ajaxResult;
         }
         PageQueryUtil pageUtil = new PageQueryUtil(params);
         PageResult blogsPage = blogService.getBlogsPage(pageUtil);
