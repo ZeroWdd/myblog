@@ -24,4 +24,6 @@ public interface BlogCommentMapper {
     BlogComment selectByPrimaryKey(Long commentId);
 
     int updateByPrimaryKeySelective(BlogComment blogComment);
+
+    int insertSelective(BlogComment comment);
 }

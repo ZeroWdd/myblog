@@ -1,18 +1,19 @@
 package com.wdd.myblog.controller.blog;
 
-import com.wdd.myblog.service.BlogCommentService;
-import com.wdd.myblog.service.BlogConfigService;
-import com.wdd.myblog.service.BlogService;
-import com.wdd.myblog.service.BlogTagService;
-import com.wdd.myblog.util.PageResult;
+import com.wdd.myblog.entity.BlogComment;
+import com.wdd.myblog.entity.BlogLink;
+import com.wdd.myblog.service.*;
+import com.wdd.myblog.util.*;
 import com.wdd.myblog.vo.BlogDetailVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Classname MyBlogController
@@ -33,6 +34,8 @@ public class MyBlogController {
     private BlogConfigService blogConfigService;
     @Autowired
     private BlogCommentService blogCommentService;
+    @Autowired
+    private BlogLinkService blogLinkService;
 
     /**
      * 博客首页
@@ -161,5 +164,115 @@ public class MyBlogController {
         request.setAttribute("hotTags", blogTagService.getBlogTagCountForIndex());
         request.setAttribute("configurations", blogConfigService.getAllConfigs());
         return "blog/" + theme + "/list";
+    }
+
+    /**
+     * 友情链接页面
+     * @param request
+     * @return
+     */
+    @GetMapping({"/link"})
+    public String link(HttpServletRequest request) {
+        request.setAttribute("pageName", "友情链接");
+        Map<Byte, List<BlogLink>> linkMap = blogLinkService.getLinksForLinkPage();
+        if (linkMap != null) {
+            //判断友链类别并封装数据 0-友链 1-推荐 2-个人网站
+            if (linkMap.containsKey((byte) 0)) {
+                request.setAttribute("favoriteLinks", linkMap.get((byte) 0));
+            }
+            if (linkMap.containsKey((byte) 1)) {
+                request.setAttribute("recommendLinks", linkMap.get((byte) 1));
+            }
+            if (linkMap.containsKey((byte) 2)) {
+                request.setAttribute("personalLinks", linkMap.get((byte) 2));
+            }
+        }
+        request.setAttribute("configurations", blogConfigService.getAllConfigs());
+        return "blog/" + theme + "/link";
+    }
+
+    /**
+     * 评论操作
+     * @param request
+     * @param session
+     * @param blogId
+     * @param verifyCode
+     * @param commentator
+     * @param email
+     * @param websiteUrl
+     * @param commentBody
+     * @return
+     */
+    @PostMapping(value = "/blog/comment")
+    @ResponseBody
+    public AjaxResult comment(HttpServletRequest request, HttpSession session,
+                              @RequestParam Long blogId, @RequestParam String verifyCode,
+                              @RequestParam String commentator, @RequestParam String email,
+                              @RequestParam String websiteUrl, @RequestParam String commentBody) {
+        AjaxResult ajaxResult = new AjaxResult();
+        if (StringUtils.isEmpty(verifyCode)) {
+            ajaxResult.setSuccess(false);
+            ajaxResult.setMessage("验证码不能为空");
+            return  ajaxResult;
+        }
+        String code = (String) session.getAttribute(Const.CODE);
+        if (StringUtils.isEmpty(code)) {
+            ajaxResult.setSuccess(false);
+            ajaxResult.setMessage("非法请求");
+            return  ajaxResult;
+        }
+        if (!verifyCode.equalsIgnoreCase(code)) {
+            ajaxResult.setSuccess(false);
+            ajaxResult.setMessage("验证码错误");
+            return  ajaxResult;
+        }
+        String ref = request.getHeader("Referer");
+        if (StringUtils.isEmpty(ref)) {
+            ajaxResult.setSuccess(false);
+            ajaxResult.setMessage("非法请求");
+            return  ajaxResult;
+        }
+        if (null == blogId || blogId < 0) {
+            ajaxResult.setSuccess(false);
+            ajaxResult.setMessage("非法请求");
+            return  ajaxResult;
+        }
+        if (StringUtils.isEmpty(commentator)) {
+            ajaxResult.setSuccess(false);
+            ajaxResult.setMessage("请输入称呼");
+            return  ajaxResult;
+        }
+        if (StringUtils.isEmpty(email)) {
+            ajaxResult.setSuccess(false);
+            ajaxResult.setMessage("请输入邮箱地址");
+            return  ajaxResult;
+        }
+        if (!PatternUtil.isEmail(email)) {
+            ajaxResult.setSuccess(false);
+            ajaxResult.setMessage("请输入正确的邮箱地址");
+            return  ajaxResult;
+        }
+        if (StringUtils.isEmpty(commentBody)) {
+            ajaxResult.setSuccess(false);
+            ajaxResult.setMessage("请输入评论内容");
+            return  ajaxResult;
+        }
+        if (commentBody.trim().length() > 200) {
+            ajaxResult.setSuccess(false);
+            ajaxResult.setMessage("评论内容过长");
+            return  ajaxResult;
+        }
+        BlogComment comment = new BlogComment();
+        comment.setBlogId(blogId);
+        comment.setCommentator(MyBlogUtils.cleanString(commentator));
+        comment.setEmail(email);
+        if (PatternUtil.isURL(websiteUrl)) {
+            comment.setWebsiteUrl(websiteUrl);
+        }
+        comment.setCommentBody(MyBlogUtils.cleanString(commentBody));
+        if(blogCommentService.addComment(comment)){
+            ajaxResult.setSuccess(true);
+        }
+        return ajaxResult;
     }
 }

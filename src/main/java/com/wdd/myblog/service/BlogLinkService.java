@@ -4,6 +4,9 @@ import com.wdd.myblog.entity.BlogLink;
 import com.wdd.myblog.util.PageQueryUtil;
 import com.wdd.myblog.util.PageResult;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @Classname BlogLinkService
  * @Description None
@@ -20,4 +23,7 @@ public interface BlogLinkService {
     int updateLink(BlogLink blogLink);
 
     boolean deleteBatch(Integer[] ids);
+
+    Map<Byte, List<BlogLink>> getLinksForLinkPage();
+
 }

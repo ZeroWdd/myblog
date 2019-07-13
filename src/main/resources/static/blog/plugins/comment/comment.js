@@ -51,7 +51,7 @@ $('#commentSubmit').click(function () {
         url: '/blog/comment',
         data: data,
         success: function (result) {
-            if (result.resultCode == 200) {
+            if (result.success) {
                 swal("评论提交成功请等待博主审核", {
                     icon: "success",
                 });

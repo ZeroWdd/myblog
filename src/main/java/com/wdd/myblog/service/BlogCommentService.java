@@ -1,5 +1,6 @@
 package com.wdd.myblog.service;
 
+import com.wdd.myblog.entity.BlogComment;
 import com.wdd.myblog.util.PageQueryUtil;
 import com.wdd.myblog.util.PageResult;
 
@@ -22,4 +23,6 @@ public interface BlogCommentService {
     boolean deleteBatch(Integer[] ids);
 
     boolean reply(Long commentId, String replyBody);
+
+    boolean addComment(BlogComment comment);
 }

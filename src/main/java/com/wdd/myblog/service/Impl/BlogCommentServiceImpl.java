@@ -93,4 +93,9 @@ public class BlogCommentServiceImpl implements BlogCommentService {
         }
         return false;
     }
+
+    @Override
+    public boolean addComment(BlogComment comment) {
+        return blogCommentMapper.insertSelective(comment) > 0;
+    }
 }

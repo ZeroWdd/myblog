@@ -26,8 +26,8 @@ public class BlogConfigServiceImpl implements BlogConfigService {
 
     public static final String websiteName = "personal blog";
     public static final String websiteDescription = "personal blog是SpringBoot2+Thymeleaf+Mybatis建造的个人博客网站.SpringBoot实战博客源码.个人博客搭建";
-    public static final String websiteLogo = "/admin/dist/img/logo2.png";
-    public static final String websiteIcon = "/admin/dist/img/favicon.png";
+    public static final String websiteLogo = "/admin/dist/img/logo.png";
+    public static final String websiteIcon = "/admin/dist/img/favicon.ico";
 
     public static final String yourAvatar = "/admin/dist/img/13.png";
     public static final String yourEmail = "1710031565@qq.com";

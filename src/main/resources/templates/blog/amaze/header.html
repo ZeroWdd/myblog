@@ -5,6 +5,7 @@
     <title th:text="|${configurations.get('websiteName')} - ${pageName}|">主页</title>
     <meta name="description" th:content="${configurations.get('websiteDescription')}">
     <link rel="shortcut icon" th:href="@{${configurations.get('websiteIcon')}}"/>
+<!--    <link rel="shortcut icon" th:href="@{/admin/dist/img/favicon.ico}"/>-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="Window-target" content="_top"/>
     <link rel="stylesheet" th:href="@{/blog/amaze/css/base.css}">
@@ -35,9 +36,6 @@
                     </li>
                     <li>
                         <a th:href="@{/link}">友链</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/about}">关于</a>
                     </li>
                     <li>
                         <a href="https://github.com/ZreoWdd">GitHub</a>
