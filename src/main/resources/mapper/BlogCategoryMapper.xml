@@ -36,16 +36,16 @@
         where category_id = #{categoryId,jdbcType=INTEGER} AND is_deleted = 0
     </select>
 
-<!--    <select id="selectByCategoryIds" resultMap="BaseResultMap">-->
-<!--        select-->
-<!--        <include refid="Base_Column_List"/>-->
-<!--        from tb_blog_category-->
-<!--        where category_id IN-->
-<!--        <foreach collection="categoryIds" item="item" index="index"-->
-<!--                 open="(" separator="," close=")">#{item}-->
-<!--        </foreach>-->
-<!--        AND is_deleted = 0-->
-<!--    </select>-->
+    <select id="selectByCategoryIds" parameterType="java.util.List" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_blog_category
+        where category_id IN
+        <foreach collection="list" item="item" index="index"
+                 open="(" separator="," close=")">#{item}
+        </foreach>
+        AND is_deleted = 0
+    </select>
 
     <select id="selectByCategoryName" parameterType="java.lang.String" resultMap="BaseResultMap">
         select

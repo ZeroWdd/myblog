@@ -15,7 +15,7 @@
                 <img th:src="@{/admin/dist/img/logo.png}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block" th:text="${session.adminUser}"></a>
+                <a href="#" class="d-block" th:text="${session.adminUser.nickName}"></a>
             </div>
         </div>
         <!-- Sidebar Menu -->
@@ -24,12 +24,12 @@
                 data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
-                <li class="nav-header">Dashboard</li>
+                <li class="nav-header">仪表盘</li>
                 <li class="nav-item">
                     <a th:href="@{/admin/index}" th:class="${path}=='index'?'nav-link active':'nav-link'">
                         <i class="nav-icon fa fa-dashboard"></i>
                         <p>
-                            Dashboard
+                            仪表盘
                         </p>
                     </a>
                 </li>

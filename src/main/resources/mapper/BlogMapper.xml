@@ -72,38 +72,38 @@
         </if>
     </select>
 
-<!--    <select id="findBlogListByType" resultMap="BaseResultMap">-->
-<!--        select-->
-<!--        <include refid="Base_Column_List"/>-->
-<!--        from tb_blog-->
-<!--        where is_deleted=0 AND blog_status = 1&lt;!&ndash; 发布状态的文章 &ndash;&gt;-->
-<!--        <if test="type!=null and type==0">-->
-<!--            order by blog_views desc-->
-<!--        </if>-->
-<!--        <if test="type!=null and type==1">-->
-<!--            order by blog_id desc-->
-<!--        </if>-->
-<!--        limit #{limit}-->
-<!--    </select>-->
+    <select id="findBlogListByType" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_blog
+        where is_deleted=0 AND blog_status = 1<!-- 发布状态的文章 -->
+        <if test="type!=null and type==0">
+            order by blog_views desc
+        </if>
+        <if test="type!=null and type==1">
+            order by blog_id desc
+        </if>
+        limit #{limit}
+    </select>
 
-<!--    <select id="getBlogsPageByTagId" parameterType="Map" resultMap="BaseResultMap">-->
-<!--        select-->
-<!--        <include refid="Base_Column_List"/>-->
-<!--        from tb_blog-->
-<!--        where blog_id IN (SELECT blog_id FROM tb_blog_tag_relation WHERE tag_id = #{tagId})-->
-<!--        AND blog_status =1 AND is_deleted=0-->
-<!--        order by blog_id desc-->
-<!--        <if test="start!=null and limit!=null">-->
-<!--            limit #{start},#{limit}-->
-<!--        </if>-->
-<!--    </select>-->
+    <select id="getBlogsPageByTagId" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_blog
+        where blog_id IN (SELECT blog_id FROM tb_blog_tag_relation WHERE tag_id = #{tagId})
+        AND blog_status =1 AND is_deleted=0
+        order by blog_id desc
+        <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+        </if>
+    </select>
 
-<!--    <select id="getTotalBlogsByTagId" parameterType="Map" resultType="int">-->
-<!--        select count(*)-->
-<!--        from tb_blog-->
-<!--        where  blog_id IN (SELECT blog_id FROM tb_blog_tag_relation WHERE tag_id = #{tagId})-->
-<!--        AND blog_status =1 AND is_deleted=0-->
-<!--    </select>-->
+    <select id="getTotalBlogsByTagId" parameterType="Map" resultType="int">
+        select count(*)
+        from tb_blog
+        where  blog_id IN (SELECT blog_id FROM tb_blog_tag_relation WHERE tag_id = #{tagId})
+        AND blog_status =1 AND is_deleted=0
+    </select>
 
 <!--    <select id="selectBySubUrl" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">-->
 <!--        select-->
@@ -298,22 +298,23 @@
 <!--      blog_content = #{blogContent,jdbcType=LONGVARCHAR}-->
 <!--    where blog_id = #{blogId,jdbcType=BIGINT}-->
 <!--  </update>-->
-<!--    <update id="updateByPrimaryKey" parameterType="com.site.blog.my.core.entity.Blog">-->
-<!--    update tb_blog-->
-<!--    set blog_title = #{blogTitle,jdbcType=VARCHAR},-->
-<!--      blog_sub_url = #{blogSubUrl,jdbcType=VARCHAR},-->
-<!--      blog_cover_image = #{blogCoverImage,jdbcType=VARCHAR},-->
-<!--      blog_category_id = #{blogCategoryId,jdbcType=INTEGER},-->
-<!--      blog_category_name = #{blogCategoryName,jdbcType=VARCHAR},-->
-<!--      blog_tags = #{blogTags,jdbcType=VARCHAR},-->
-<!--      blog_status = #{blogStatus,jdbcType=TINYINT},-->
-<!--      blog_views = #{blogViews,jdbcType=BIGINT},-->
-<!--      enable_comment = #{enableComment,jdbcType=TINYINT},-->
-<!--      is_deleted = #{isDeleted,jdbcType=TINYINT},-->
-<!--      create_time = #{createTime,jdbcType=TIMESTAMP},-->
-<!--      update_time = #{updateTime,jdbcType=TIMESTAMP}-->
-<!--    where blog_id = #{blogId,jdbcType=BIGINT}-->
-<!--  </update>-->
+
+    <update id="updateByPrimaryKey" parameterType="com.wdd.myblog.entity.Blog">
+    update tb_blog
+    set blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_sub_url = #{blogSubUrl,jdbcType=VARCHAR},
+      blog_cover_image = #{blogCoverImage,jdbcType=VARCHAR},
+      blog_category_id = #{blogCategoryId,jdbcType=INTEGER},
+      blog_category_name = #{blogCategoryName,jdbcType=VARCHAR},
+      blog_tags = #{blogTags,jdbcType=VARCHAR},
+      blog_status = #{blogStatus,jdbcType=TINYINT},
+      blog_views = #{blogViews,jdbcType=BIGINT},
+      enable_comment = #{enableComment,jdbcType=TINYINT},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where blog_id = #{blogId,jdbcType=BIGINT}
+  </update>
 
     <update id="updateBlogCategorys">
         update tb_blog

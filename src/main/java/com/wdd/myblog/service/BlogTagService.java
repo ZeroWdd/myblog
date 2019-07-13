@@ -1,7 +1,10 @@
 package com.wdd.myblog.service;
 
+import com.wdd.myblog.entity.BlogTagCount;
 import com.wdd.myblog.util.PageQueryUtil;
 import com.wdd.myblog.util.PageResult;
+
+import java.util.List;
 
 /**
  * @Classname BlogTagService
@@ -15,4 +18,7 @@ public interface BlogTagService {
     boolean saveTag(String tagName);
 
     boolean deleteBatch(Integer[] ids);
+
+    List<BlogTagCount> getBlogTagCountForIndex();
+
 }

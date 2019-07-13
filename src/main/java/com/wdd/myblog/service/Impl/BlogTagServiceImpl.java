@@ -3,6 +3,7 @@ package com.wdd.myblog.service.Impl;
 import com.wdd.myblog.dao.BlogTagMapper;
 import com.wdd.myblog.dao.BlogTagRelationMapper;
 import com.wdd.myblog.entity.BlogTag;
+import com.wdd.myblog.entity.BlogTagCount;
 import com.wdd.myblog.service.BlogTagService;
 import com.wdd.myblog.util.PageQueryUtil;
 import com.wdd.myblog.util.PageResult;
@@ -54,5 +55,10 @@ public class BlogTagServiceImpl implements BlogTagService {
         }
         //删除tag
         return blogTagMapper.deleteBatch(ids) > 0;
+    }
+
+    @Override
+    public List<BlogTagCount> getBlogTagCountForIndex() {
+        return blogTagMapper.getTagCount();
     }
 }

@@ -45,21 +45,21 @@
             <p class="login-box-msg">your personal blog , enjoy it</p>
             <form id="form" method="post">
                 <div class="form-group has-feedback">
-                    <span class="fa fa-user form-control-feedback"></span>
-                    <input type="text" id="userName" name="userName" class="form-control" placeholder="请输入账号"
+                    <span class="fa fa-user form-control-feedback" style="float: left;"></span>
+                    <input type="text" id="userName" name="userName" class="form-control" style="width: 265px; margin-left: 25px" placeholder="请输入账号"
                            required="true">
                 </div>
                 <div class="form-group has-feedback">
-                    <span class="fa fa-lock form-control-feedback"></span>
-                    <input type="password" id="password" name="password" class="form-control" placeholder="请输入密码"
+                    <span class="fa fa-lock form-control-feedback" style="float: left;"></span>
+                    <input type="password" id="password" name="password" class="form-control" style="width: 265px; margin-left: 25px" placeholder="请输入密码"
                            required="true">
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <input type="text" class="form-control" name="verifyCode" placeholder="请输入验证码" required="true">
+                        <input type="text" class="form-control" name="verifyCode" style="margin-left: 25px;width: 140px;" placeholder="请输入验证码" required="true">
                     </div>
                     <div class="col-6">
-                        <img id="vcodeImg" alt="单击图片刷新！" class="pointer" th:src="@{/checkCode}"
+                        <img id="vcodeImg" style="margin-left: 13px;" alt="单击图片刷新！" class="pointer" th:src="@{/checkCode}"
                              onclick="this.src='/checkCode?d='+new Date()*1">
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                 <div class="col-8">
                 </div>
                 <div class="col-4">
-                    <button id="submitBtn" class="btn btn-primary btn-block btn-flat">登录
+                    <button style="width: 68px;" id="submitBtn" class="btn btn-primary btn-block btn-flat">登录
                     </button>
 
                 </div>
