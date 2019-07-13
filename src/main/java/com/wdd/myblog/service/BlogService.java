@@ -36,4 +36,6 @@ public interface BlogService {
     BlogDetailVO getBlogDetail(Long blogId);
 
     PageResult getBlogsPageByCategory(String categoryName, Integer page);
+
+    int getTotalBlogs();
 }

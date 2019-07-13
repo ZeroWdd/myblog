@@ -1,5 +1,8 @@
 package com.wdd.myblog.service;
 
+import com.wdd.myblog.util.PageQueryUtil;
+import com.wdd.myblog.util.PageResult;
+
 /**
  * @Classname BlogCommentService
  * @Description None
@@ -7,5 +10,14 @@ package com.wdd.myblog.service;
  * @Created by WDD
  */
 public interface BlogCommentService {
-    Object getCommentPageByBlogIdAndPageNum(Long blogId, int page);
+    PageResult getCommentPageByBlogIdAndPageNum(Long blogId, int page);
+
+    int getTotalComments();
+
+
+    PageResult getCommentsPage(PageQueryUtil pageUtil);
+
+    boolean checkDone(Integer[] ids);
+
+    boolean deleteBatch(Integer[] ids);
 }

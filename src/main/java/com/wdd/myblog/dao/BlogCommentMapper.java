@@ -16,4 +16,8 @@ public interface BlogCommentMapper {
     Integer getTotalBlogComments(Map params);
 
     List<BlogComment> findBlogCommentList(PageQueryUtil pageUtil);
+
+    int checkDone(Integer[] ids);
+
+    int deleteBatch(Integer[] ids);
 }

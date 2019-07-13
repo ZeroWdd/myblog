@@ -15,7 +15,7 @@
                 <img th:src="@{/admin/dist/img/logo.png}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block" th:text="${session.adminUser.nickName}"></a>
+                <a href="#" class="d-block" th:if="${session.adminUser} != null" th:text="${session.adminUser.nickName}">超级管理员</a>
             </div>
         </div>
         <!-- Sidebar Menu -->

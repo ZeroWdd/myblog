@@ -57,21 +57,24 @@
 <!--    update tb_blog_comment set is_deleted=1-->
 <!--    where comment_id = #{commentId,jdbcType=BIGINT} and is_deleted=0-->
 <!--  </update>-->
-<!--    <update id="checkDone">-->
-<!--        update tb_blog_comment-->
-<!--        set comment_status=1 where comment_id in-->
-<!--        <foreach item="id" collection="array" open="(" separator="," close=")">-->
-<!--            #{id}-->
-<!--        </foreach>-->
-<!--        and comment_status = 0-->
-<!--    </update>-->
-<!--    <update id="deleteBatch">-->
-<!--        update tb_blog_comment-->
-<!--        set is_deleted=1 where comment_id in-->
-<!--        <foreach item="id" collection="array" open="(" separator="," close=")">-->
-<!--            #{id}-->
-<!--        </foreach>-->
-<!--    </update>-->
+
+    <update id="checkDone">
+        update tb_blog_comment
+        set comment_status=1 where comment_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        and comment_status = 0
+    </update>
+
+    <update id="deleteBatch">
+        update tb_blog_comment
+        set is_deleted=1 where comment_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
 <!--    <insert id="insert" parameterType="com.site.blog.my.core.entity.BlogComment">-->
 <!--    insert into tb_blog_comment (comment_id, blog_id, commentator, -->
 <!--      email, website_url, comment_body, -->

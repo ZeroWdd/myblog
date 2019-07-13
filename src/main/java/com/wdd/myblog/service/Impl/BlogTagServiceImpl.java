@@ -61,4 +61,9 @@ public class BlogTagServiceImpl implements BlogTagService {
     public List<BlogTagCount> getBlogTagCountForIndex() {
         return blogTagMapper.getTagCount();
     }
+
+    @Override
+    public int getTotalTags() {
+        return blogTagMapper.getTotalTags(null);
+    }
 }

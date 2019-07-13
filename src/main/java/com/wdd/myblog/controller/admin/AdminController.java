@@ -1,7 +1,7 @@
 package com.wdd.myblog.controller.admin;
 
 import com.wdd.myblog.entity.AdminUser;
-import com.wdd.myblog.service.AdminUserService;
+import com.wdd.myblog.service.*;
 import com.wdd.myblog.util.AjaxResult;
 import com.wdd.myblog.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +24,14 @@ public class AdminController {
 
     @Autowired
     private AdminUserService adminUserService;
+    @Autowired
+    private BlogService blogService;
+    @Autowired
+    private BlogCategoryService blogCategoryService;
+    @Autowired
+    private BlogTagService blogTagService;
+    @Autowired
+    private BlogCommentService blogCommentService;
 
     /**
      * 登录界面
@@ -82,11 +90,11 @@ public class AdminController {
 
     @GetMapping({"/index"})
     public String index(HttpServletRequest request) {
-//        request.setAttribute("categoryCount", categoryService.getTotalCategories());
-//        request.setAttribute("blogCount", blogService.getTotalBlogs());
+        request.setAttribute("categoryCount", blogCategoryService.getTotalCategories());
+        request.setAttribute("blogCount", blogService.getTotalBlogs());
 //        request.setAttribute("linkCount", linkService.getTotalLinks());
-//        request.setAttribute("tagCount", tagService.getTotalTags());
-//        request.setAttribute("commentCount", commentService.getTotalComments());
+        request.setAttribute("tagCount", blogTagService.getTotalTags());
+        request.setAttribute("commentCount", blogCommentService.getTotalComments());
         request.setAttribute(Const.PATH, "index");
         return "admin/index";
     }

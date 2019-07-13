@@ -287,6 +287,11 @@ public class BlogServiceImpl implements BlogService {
         return null;
     }
 
+    @Override
+    public int getTotalBlogs() {
+        return blogMapper.getTotalBlogs(null);
+    }
+
 
     /**
      * 抽取方法

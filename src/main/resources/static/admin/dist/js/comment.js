@@ -83,7 +83,7 @@ function checkDoneComments() {
                     contentType: "application/json",
                     data: JSON.stringify(ids),
                     success: function (r) {
-                        if (r.resultCode == 200) {
+                        if (r.success) {
                             swal("审核成功", {
                                 icon: "success",
                             });
@@ -122,7 +122,7 @@ function deleteComments() {
                     contentType: "application/json",
                     data: JSON.stringify(ids),
                     success: function (r) {
-                        if (r.resultCode == 200) {
+                        if (r.success) {
                             swal("删除成功", {
                                 icon: "success",
                             });

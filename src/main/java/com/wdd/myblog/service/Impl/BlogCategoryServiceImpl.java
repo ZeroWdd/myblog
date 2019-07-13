@@ -81,4 +81,9 @@ public class BlogCategoryServiceImpl implements BlogCategoryService {
         return blogCategoryMapper.deleteBatch(ids) > 0;
     }
 
+    @Override
+    public int getTotalCategories() {
+        return blogCategoryMapper.getTotalCategories(null);
+    }
+
 }

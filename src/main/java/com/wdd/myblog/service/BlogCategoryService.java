@@ -24,4 +24,6 @@ public interface BlogCategoryService {
     BlogCategory getBlogCategoryById(Integer id);
 
     boolean deleteBatch(Integer[] ids);
+
+    int getTotalCategories();
 }

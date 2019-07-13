@@ -26,7 +26,7 @@ public class BlogCommentServiceImpl implements BlogCommentService {
     private BlogCommentMapper blogCommentMapper;
 
     @Override
-    public Object getCommentPageByBlogIdAndPageNum(Long blogId, int page) {
+    public PageResult getCommentPageByBlogIdAndPageNum(Long blogId, int page) {
         if (page < 1) {
             return null;
         }
@@ -44,5 +44,28 @@ public class BlogCommentServiceImpl implements BlogCommentService {
             return pageResult;
         }
         return null;
+    }
+
+    @Override
+    public int getTotalComments() {
+        return blogCommentMapper.getTotalBlogComments(null);
+    }
+
+    @Override
+    public PageResult getCommentsPage(PageQueryUtil pageUtil) {
+        List<BlogComment> comments = blogCommentMapper.findBlogCommentList(pageUtil);
+        int total = blogCommentMapper.getTotalBlogComments(pageUtil);
+        PageResult pageResult = new PageResult(comments, total, pageUtil.getLimit(), pageUtil.getPage());
+        return pageResult;
+    }
+
+    @Override
+    public boolean checkDone(Integer[] ids) {
+        return blogCommentMapper.checkDone(ids) > 0;
+    }
+
+    @Override
+    public boolean deleteBatch(Integer[] ids) {
+        return blogCommentMapper.deleteBatch(ids) > 0;
     }
 }
