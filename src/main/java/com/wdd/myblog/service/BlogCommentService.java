@@ -20,4 +20,6 @@ public interface BlogCommentService {
     boolean checkDone(Integer[] ids);
 
     boolean deleteBatch(Integer[] ids);
+
+    boolean reply(Long commentId, String replyBody);
 }

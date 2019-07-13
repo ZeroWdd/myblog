@@ -99,4 +99,79 @@ public class AdminController {
         return "admin/index";
     }
 
+    /**
+     * 跳转修改密码页面
+     * @param session
+     * @param request
+     * @return
+     */
+    @GetMapping("/profile")
+    public String profile(HttpSession session,HttpServletRequest request) {
+        AdminUser adminUser = (AdminUser)session.getAttribute(Const.ADMINUSER);
+        if (adminUser == null) {
+            return "admin/login";
+        }
+        request.setAttribute("path", "profile");
+        request.setAttribute("loginUserName", adminUser.getLoginUserName());
+        request.setAttribute("nickName", adminUser.getNickName());
+        return "admin/profile";
+    }
+
+    /**
+     * 修改密码
+     * @param request
+     * @param originalPassword
+     * @param newPassword
+     * @return
+     */
+    @PostMapping("/profile/password")
+    @ResponseBody
+    public String passwordUpdate(HttpSession session, @RequestParam("originalPassword") String originalPassword,
+                                 @RequestParam("newPassword") String newPassword) {
+        AdminUser adminUser = (AdminUser)session.getAttribute(Const.ADMINUSER);
+        if (StringUtils.isEmpty(originalPassword) || StringUtils.isEmpty(newPassword)) {
+            return "参数不能为空";
+        }
+        if (adminUserService.updatePassword(adminUser.getAdminUserId(), originalPassword, newPassword)) {
+            //修改成功后清空session中的数据，前端控制跳转至登录页
+            session.invalidate();
+            return "success";
+        } else {
+            return "修改失败";
+        }
+    }
+
+    /**
+     * 修改个人名称
+     * @param request
+     * @param loginUserName
+     * @param nickName
+     * @return
+     */
+    @PostMapping("/profile/name")
+    @ResponseBody
+    public String nameUpdate(HttpSession session,HttpServletRequest request, @RequestParam("loginUserName") String loginUserName,
+                             @RequestParam("nickName") String nickName) {
+        AdminUser adminUser = (AdminUser)session.getAttribute(Const.ADMINUSER);
+        if (StringUtils.isEmpty(loginUserName) || StringUtils.isEmpty(nickName)) {
+            return "参数不能为空";
+        }
+        if (adminUserService.updateName(adminUser.getAdminUserId(), loginUserName, nickName)) {
+            return "success";
+        } else {
+            return "修改失败";
+        }
+    }
+
+    /**
+     * 登出
+     * @param session
+     * @return
+     */
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "admin/login";
+    }
+
 }

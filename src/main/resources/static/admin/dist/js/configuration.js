@@ -1,7 +1,7 @@
 $(function () {
     //修改站点信息
     $('#updateWebsiteButton').click(function () {
-        $("#updateWebsiteButton").attr("disabled", true);
+        //$("#updateWebsiteButton").attr("disabled", true);
         //ajax提交数据
         var params = $("#websiteForm").serialize();
         $.ajax({
@@ -9,7 +9,7 @@ $(function () {
             url: "/admin/configurations/website",
             data: params,
             success: function (result) {
-                if (result.resultCode == 200 && result.data) {
+                if (result.success) {
                     swal("保存成功", {
                         icon: "success",
                     });
@@ -30,14 +30,14 @@ $(function () {
     });
     //个人信息
     $('#updateUserInfoButton').click(function () {
-        $("#updateUserInfoButton").attr("disabled", true);
+        //$("#updateUserInfoButton").attr("disabled", true);
         var params = $("#userInfoForm").serialize();
         $.ajax({
             type: "POST",
             url: "/admin/configurations/userInfo",
             data: params,
             success: function (result) {
-                if (result.resultCode == 200&& result.data) {
+                if (result.success) {
                     swal("保存成功", {
                         icon: "success",
                     });
@@ -58,14 +58,14 @@ $(function () {
     });
     //修改底部设置
     $('#updateFooterButton').click(function () {
-        $("#updateFooterButton").attr("disabled", true);
+        //$("#updateFooterButton").attr("disabled", true);
         var params = $("#footerForm").serialize();
         $.ajax({
             type: "POST",
             url: "/admin/configurations/footer",
             data: params,
             success: function (result) {
-                if (result.resultCode == 200&& result.data) {
+                if (result.success) {
                     swal("保存成功", {
                         icon: "success",
                     });

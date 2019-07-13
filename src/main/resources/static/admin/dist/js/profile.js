@@ -1,7 +1,7 @@
 $(function () {
     //修改个人信息
     $('#updateUserNameButton').click(function () {
-        $("#updateUserNameButton").attr("disabled",true);
+        //$("#updateUserNameButton").attr("disabled",true);
         var userName = $('#loginUserName').val();
         var nickName = $('#nickName').val();
         if (validUserNameForUpdate(userName, nickName)) {
@@ -14,9 +14,9 @@ $(function () {
                 success: function (r) {
                     console.log(r);
                     if (r == 'success') {
-                        alert('修改成功');
+                        layer.msg('修改成功',{time:1000})
                     } else {
-                        alert('修改失败');
+                        layer.msg('修改失败',{time:1000})
                     }
                 }
             });
@@ -24,7 +24,7 @@ $(function () {
     });
     //修改密码
     $('#updatePasswordButton').click(function () {
-        $("#updatePasswordButton").attr("disabled",true);
+        //$("#updatePasswordButton").attr("disabled",true);
         var originalPassword = $('#originalPassword').val();
         var newPassword = $('#newPassword').val();
         if (validPasswordForUpdate(originalPassword, newPassword)) {
@@ -36,10 +36,11 @@ $(function () {
                 success: function (r) {
                     console.log(r);
                     if (r == 'success') {
-                        alert('修改成功');
-                        window.location.href = '/admin/login';
+                        layer.msg('修改成功',{time:1000},function() {
+                            window.location.href = "/admin/login";
+                        })
                     } else {
-                        alert('修改失败');
+                        layer.msg('修改失败',{time:1000})
                     }
                 }
             });
@@ -52,24 +53,24 @@ $(function () {
  */
 function validUserNameForUpdate(userName, nickName) {
     if (isNull(userName) || userName.trim().length < 1) {
-        $('#updateUserName-info').css("display", "block");
-        $('#updateUserName-info').html("请输入登陆名称！");
-        return false;
+        layer.msg('请输入登陆名称！',{time:1000},function() {
+            return false;
+        })
     }
     if (isNull(nickName) || nickName.trim().length < 1) {
-        $('#updateUserName-info').css("display", "block");
-        $('#updateUserName-info').html("昵称不能为空！");
-        return false;
+        layer.msg('昵称不能为空！',{time:1000},function() {
+            return false;
+        })
     }
     if (!validUserName(userName)) {
-        $('#updateUserName-info').css("display", "block");
-        $('#updateUserName-info').html("请输入符合规范的登录名！");
-        return false;
+        layer.msg('请输入符合规范的登录名！',{time:1000},function() {
+            return false;
+        })
     }
     if (!validCN_ENString2_18(nickName)) {
-        $('#updateUserName-info').css("display", "block");
-        $('#updateUserName-info').html("请输入符合规范的昵称！");
-        return false;
+        layer.msg('请输入符合规范的昵称！',{time:1000},function() {
+            return false;
+        })
     }
     return true;
 }
@@ -79,18 +80,15 @@ function validUserNameForUpdate(userName, nickName) {
  */
 function validPasswordForUpdate(originalPassword, newPassword) {
     if (isNull(originalPassword) || originalPassword.trim().length < 1) {
-        $('#updatePassword-info').css("display", "block");
-        $('#updatePassword-info').html("请输入原密码！");
+        layer.msg('请输入原密码！',{time:1000},function() {
+            return false;
+        })
         return false;
     }
     if (isNull(newPassword) || newPassword.trim().length < 1) {
-        $('#updatePassword-info').css("display", "block");
-        $('#updatePassword-info').html("新密码不能为空！");
-        return false;
-    }
-    if (!validPassword(newPassword)) {
-        $('#updatePassword-info').css("display", "block");
-        $('#updatePassword-info').html("请输入符合规范的密码！");
+        layer.msg('新密码不能为空！',{time:1000},function() {
+            return false;
+        })
         return false;
     }
     return true;

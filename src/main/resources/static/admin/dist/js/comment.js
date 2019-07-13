@@ -4,10 +4,11 @@ $(function () {
         datatype: "json",
         colModel: [
             {label: 'id', name: 'commentId', index: 'commentId', width: 50, key: true, hidden: true},
-            {label: '评论内容', name: 'commentBody', index: 'commentBody', width: 120},
-            {label: '评论时间', name: 'commentCreateTime', index: 'commentCreateTime', width: 60},
-            {label: '评论人名称', name: 'commentator', index: 'commentator', width: 60},
-            {label: '评论人邮箱', name: 'email', index: 'email', width: 90},
+            {label: '博客标题', name: 'blogName', index: 'blogName', width: 80},
+            {label: '评论内容', name: 'commentBody', index: 'commentBody', width: 90},
+            {label: '评论时间', name: 'commentCreateTime', index: 'commentCreateTime', width: 50},
+            {label: '评论人名称', name: 'commentator', index: 'commentator', width: 45},
+            {label: '评论人邮箱', name: 'email', index: 'email', width: 80},
             {label: '状态', name: 'commentStatus', index: 'commentStatus', width: 60, formatter: statusFormatter},
             {label: '回复内容', name: 'replyBody', index: 'replyBody', width: 120},
         ],
@@ -174,7 +175,7 @@ $('#saveButton').click(function () {
             url: url,
             data: params,
             success: function (result) {
-                if (result.resultCode == 200) {
+                if (result.success) {
                     $('#replyModal').modal('hide');
                     swal("回复成功", {
                         icon: "success",

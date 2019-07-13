@@ -10,4 +10,8 @@ import com.wdd.myblog.entity.AdminUser;
  */
 public interface AdminUserMapper {
     AdminUser login(String userName, String password);
+
+    AdminUser selectByPrimaryKey(Integer adminUserId);
+
+    int updateByPrimaryKeySelective(AdminUser adminUser);
 }

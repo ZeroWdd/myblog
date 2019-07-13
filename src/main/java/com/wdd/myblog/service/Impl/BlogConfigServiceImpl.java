@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,12 +30,12 @@ public class BlogConfigServiceImpl implements BlogConfigService {
     public static final String websiteIcon = "/admin/dist/img/favicon.png";
 
     public static final String yourAvatar = "/admin/dist/img/13.png";
-    public static final String yourEmail = "2449207463@qq.com";
-    public static final String yourName = "十三";
+    public static final String yourEmail = "1710031565@qq.com";
+    public static final String yourName = "ZeroWdd";
 
     public static final String footerAbout = "your personal blog. have fun.";
-    public static final String footerICP = "浙ICP备 xxxxxx-x号";
-    public static final String footerCopyRight = "@2018 十三";
+    public static final String footerICP = "";
+    public static final String footerCopyRight = "ZeroWdd";
     public static final String footerPoweredBy = "personal blog";
     public static final String footerPoweredByURL = "##";
 
@@ -82,5 +83,16 @@ public class BlogConfigServiceImpl implements BlogConfigService {
             }
         }
         return configMap;
+    }
+
+    @Override
+    public int updateConfig(String configName, String configValue) {
+        BlogConfig blogConfig = blogConfigMapper.selectByPrimaryKey(configName);
+        if (blogConfig != null) {
+            blogConfig.setConfigValue(configValue);
+            blogConfig.setUpdateTime(new Date());
+            return blogConfigMapper.updateByPrimaryKeySelective(blogConfig);
+        }
+        return 0;
     }
 }

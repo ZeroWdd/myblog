@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<header th:replace="admin/header::header-fragment"></header>
+<header th:replace="admin/header::header-fragment">
+    <!--  layui  -->
+    <link rel="stylesheet" th:href="@{/admin/plugins/layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/admin/plugins/layui/css/modules/layer/default/layer.css}">
+</header>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
     <!-- 引入页面头header-fragment -->
@@ -163,6 +167,8 @@
 <script th:src="@{/admin/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <!-- AdminLTE App -->
 <script th:src="@{/admin/dist/js/adminlte.min.js}"></script>
+<!--layui-->
+<script th:src="@{/admin/plugins/layui/layui.all.js}"></script>
 <!-- sweetalert -->
 <script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
 <script th:src="@{/admin/dist/js/configuration.js}"></script>

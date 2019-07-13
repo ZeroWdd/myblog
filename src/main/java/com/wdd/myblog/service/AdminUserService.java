@@ -10,4 +10,8 @@ import com.wdd.myblog.entity.AdminUser;
  */
 public interface AdminUserService {
     AdminUser login(String userName, String password);
+
+    boolean updatePassword(Integer adminUserId, String originalPassword, String newPassword);
+
+    boolean updateName(Integer adminUserId, String loginUserName, String nickName);
 }

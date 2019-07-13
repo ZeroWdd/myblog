@@ -20,4 +20,8 @@ public interface BlogCommentMapper {
     int checkDone(Integer[] ids);
 
     int deleteBatch(Integer[] ids);
+
+    BlogComment selectByPrimaryKey(Long commentId);
+
+    int updateByPrimaryKeySelective(BlogComment blogComment);
 }

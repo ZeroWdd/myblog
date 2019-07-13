@@ -101,4 +101,30 @@ public class CommentController {
         }
         return ajaxResult;
     }
+
+
+    /**
+     * 回复功能实现
+     * @param commentId
+     * @param replyBody
+     * @return
+     */
+    @PostMapping("/comments/reply")
+    @ResponseBody
+    public AjaxResult checkDone(@RequestParam("commentId") Long commentId,
+                            @RequestParam("replyBody") String replyBody) {
+        AjaxResult ajaxResult = new AjaxResult();
+        if (commentId == null || commentId < 1 || StringUtils.isEmpty(replyBody)) {
+            ajaxResult.setSuccess(false);
+            ajaxResult.setMessage("参数异常！");
+            return ajaxResult;
+        }
+        if (blogCommentService.reply(commentId, replyBody)) {
+            ajaxResult.setSuccess(true);
+        } else {
+            ajaxResult.setSuccess(false);
+            ajaxResult.setMessage("审核失败");
+        }
+        return ajaxResult;
+    }
 }
