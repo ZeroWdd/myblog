@@ -94,7 +94,7 @@ $('#saveButton').click(function () {
         url: url,
         data: params,
         success: function (result) {
-            if (result.resultCode == 200 && result.data) {
+            if (result.success) {
                 $('#linkModal').modal('hide');
                 swal("保存成功", {
                     icon: "success",
@@ -126,7 +126,7 @@ function linkEdit() {
     reset();
     //请求数据
     $.get("/admin/links/info/" + id, function (r) {
-        if (r.resultCode == 200 && r.data != null) {
+        if (r.success) {
             //填充数据至modal
             $("#linkName").val(r.data.linkName);
             $("#linkUrl").val(r.data.linkUrl);
@@ -165,7 +165,7 @@ function deleteLink() {
                     contentType: "application/json",
                     data: JSON.stringify(ids),
                     success: function (r) {
-                        if (r.resultCode == 200) {
+                        if (r.success) {
                             swal("删除成功", {
                                 icon: "success",
                             });
