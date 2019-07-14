@@ -32,6 +32,8 @@ public class AdminController {
     private BlogTagService blogTagService;
     @Autowired
     private BlogCommentService blogCommentService;
+    @Autowired
+    private BlogLinkService blogLinkService;
 
     /**
      * 登录界面
@@ -92,7 +94,7 @@ public class AdminController {
     public String index(HttpServletRequest request) {
         request.setAttribute("categoryCount", blogCategoryService.getTotalCategories());
         request.setAttribute("blogCount", blogService.getTotalBlogs());
-//        request.setAttribute("linkCount", linkService.getTotalLinks());
+        request.setAttribute("linkCount", blogLinkService.getTotalLinks());
         request.setAttribute("tagCount", blogTagService.getTotalTags());
         request.setAttribute("commentCount", blogCommentService.getTotalComments());
         request.setAttribute(Const.PATH, "index");
@@ -119,7 +121,7 @@ public class AdminController {
 
     /**
      * 修改密码
-     * @param request
+     * @param session
      * @param originalPassword
      * @param newPassword
      * @return

@@ -64,4 +64,9 @@ public class BlogLinkServiceImpl implements BlogLinkService {
         }
         return null;
     }
+
+    @Override
+    public int getTotalLinks() {
+        return blogLinkMapper.getTotalLinks(null);
+    }
 }

@@ -26,4 +26,5 @@ public interface BlogLinkService {
 
     Map<Byte, List<BlogLink>> getLinksForLinkPage();
 
+    int getTotalLinks();
 }
